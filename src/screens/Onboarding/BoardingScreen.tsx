@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const screen = () => {
+const BoardingScreen = () => {
   return (
     <View>
-      <Text>screen is checking </Text>
+      <Text>BoardingScreen</Text>
     </View>
   )
 }
 
-export default screen
+export default BoardingScreen
 
 const styles = StyleSheet.create({})

@@ -5,33 +5,20 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View,Text } from 'react-native';
+
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import RootNavigator from './src/navigators/RootNavigator'
 
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
 
+const App = () => {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-
-      {/* <NewAppScreen templateFileName="App.tsx" /> */}
-      <Text>
-        hey Github. hassan check the code is merged or not 
-      </Text>
-
-      <NewAppScreen templateFileName="App.tsx" />
-
-
-    </View>
-  );
+    <NavigationContainer>
+      <RootNavigator />
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default App
 
-export default App;
