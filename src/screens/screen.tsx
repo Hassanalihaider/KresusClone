@@ -4,7 +4,7 @@ import React from 'react'
 const screen = () => {
   return (
     <View>
-      <Text>screen</Text>
+      <Text>screen is checking </Text>
     </View>
   )
 }
