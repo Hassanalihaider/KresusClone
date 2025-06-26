@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
 import SkeletonLoader from '../components/SkeletonLoader';
 import styles from '../styles/homestyles'
-import { index } from '../assets';
+import {Images} from '../assets/index';
 
 type User = {
   id: number;
@@ -43,19 +43,19 @@ const HomeScreen: React.FC = () => {
     let iconSource;
     switch (tabName) {
       case 'Home':
-        iconSource = index.home;
+        iconSource = Images.home;
         break;
       case 'Assets':
-        iconSource = index.assets;
+        iconSource = Images.assets;
         break;
       case 'Trade':
-        iconSource = index.trade;
+        iconSource = Images.trade;
         break;
       case 'Explore':
-        iconSource = index.explore;
+        iconSource = Images.explore;
         break;
       default:
-        iconSource = index.home;
+        iconSource = Images.home;
     }
 
     return (
@@ -85,7 +85,7 @@ const HomeScreen: React.FC = () => {
       <View style={styles.header}>
         <View style={styles.profileContainer}>
           <Image
-            source={index.profileicon}
+            source={Images.profileicon}
             style={styles.profileIcon}
           />
           <Text style={styles.profileName}>Nate Diggity</Text>
@@ -93,13 +93,13 @@ const HomeScreen: React.FC = () => {
         <View style={styles.headerIcons}>
             <TouchableOpacity>
           <Image
-            source={index.scanner}
+            source={Images.scanner}
             style={styles.headerIcon}
           />
           </TouchableOpacity>
           <TouchableOpacity>
           <Image
-            source={index.secure}
+            source={Images.secure}
             style={[styles.headerIcon, { marginLeft: 20 }]}
           />
           </TouchableOpacity>
