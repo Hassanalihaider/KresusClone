@@ -1,12 +1,11 @@
-// src/screens/SplashScreen.tsx
 import React, { useEffect } from 'react'
 import { View,StyleSheet } from 'react-native'
 import Background from '../../components/Background'
 import { useNavigation } from '@react-navigation/native'
 
-const SplashScreen = () => {
+export const SplashScreen = () => {
   const navigation = useNavigation()
-
+// navigation.navigate ("Splash")
   useEffect(() => {
     const timer = setTimeout(() => {
      // will navigate 
@@ -22,11 +21,9 @@ const SplashScreen = () => {
   )
 }
 
-export default SplashScreen
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
+
   },
 })

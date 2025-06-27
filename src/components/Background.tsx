@@ -1,4 +1,3 @@
-// src/components/Background.tsx
 import React from 'react'
 import { View, Image, StyleSheet, Dimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
@@ -62,6 +61,6 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: height * 0.13,
     width: width * 0.65,
-    height: height * 0.1, // styling work tomorrow 
+    height: height * 0.1,
   },
 })

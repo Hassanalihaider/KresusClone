@@ -1,65 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
-import SkeletonLoader from '../components/SkeletonLoader';
-import styles from '../styles/homestyles'
-import {Images} from '../assets/index';
+import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { SkeletonLoader, ActionButtons, SummaryCard, MarketActivityCard } from '../components';
+import styles from '../styles/homestyles';
+import { Images } from '../assets/index';
 
-type User = {
-  id: number;
-  name: string;
-  role: string;
-};
-
-const FAKE_DATA = Array.from({ length: 5 });
-
-const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC = () => {
+  const [profilename] = useState('Nate Diggity');
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<User[]>([]);
   const [activeTab, setActiveTab] = useState('Home');
+  const [activeFilter, setActiveFilter] = useState('1D');
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setData([
-        { id: 1, name: 'Alice', role: 'Designer' },
-        { id: 2, name: 'Bob', role: 'Developer' },
-      ]);
+    const timer = setTimeout(() => {
       setLoading(false);
+      setShowContent(true);
     }, 2500);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  const renderItem = ({ item }: { item: User }) => (
-    <View style={styles.realCard}>
-      <View style={styles.realContentRow}>
-        <View style={styles.realAvatar} />
-        <View>
-          <View style={styles.realLine} />
-          <View style={styles.realLineHalf} />
-        </View>
-      </View>
-    </View>
-  );
-
   const renderFooterItem = (tabName: string) => {
-    let iconSource;
-    switch (tabName) {
-      case 'Home':
-        iconSource = Images.home;
-        break;
-      case 'Assets':
-        iconSource = Images.assets;
-        break;
-      case 'Trade':
-        iconSource = Images.trade;
-        break;
-      case 'Explore':
-        iconSource = Images.explore;
-        break;
-      default:
-        iconSource = Images.home;
-    }
-
+    const iconSource = Images[tabName.toLowerCase() as keyof typeof Images] || Images.home;
+    const isActive = activeTab === tabName;
+    
     return (
       <TouchableOpacity 
+        key={`tab-${tabName}`}
         style={styles.footerItem} 
         onPress={() => setActiveTab(tabName)}
       >
@@ -67,12 +34,12 @@ const HomeScreen: React.FC = () => {
           source={iconSource}
           style={[
             styles.footerIcon,
-            activeTab === tabName ? styles.activeFooterIcon : styles.inactiveFooterIcon
+            isActive ? styles.activeFooterIcon : styles.inactiveFooterIcon
           ]}
         />
         <Text style={[
           styles.footerText,
-          activeTab === tabName ? styles.activeFooterText : styles.inactiveFooterText
+          isActive ? styles.activeFooterText : styles.inactiveFooterText
         ]}>
           {tabName}
         </Text>
@@ -88,45 +55,53 @@ const HomeScreen: React.FC = () => {
             source={Images.profileicon}
             style={styles.profileIcon}
           />
-          <Text style={styles.profileName}>Nate Diggity</Text>
+          <Text style={styles.profileName}>{profilename}</Text>
         </View>
         <View style={styles.headerIcons}>
-            <TouchableOpacity>
-          <Image
-            source={Images.scanner}
-            style={styles.headerIcon}
-          />
+          <TouchableOpacity>
+            <Image source={Images.scanner} style={styles.headerIcon} />
           </TouchableOpacity>
           <TouchableOpacity>
-          <Image
-            source={Images.secure}
-            style={[styles.headerIcon, { marginLeft: 20 }]}
-          />
+            <Image source={Images.secure} style={[styles.headerIcon, { marginLeft: 20 }]} />
           </TouchableOpacity>
         </View>
       </View>
 
-      <FlatList<User | undefined>
-        data={loading ? FAKE_DATA.map(() => undefined) : data}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({ index, item }) =>
-          loading ? (
-            <SkeletonLoader type={index % 2 === 0 ? 'card' : 'row'} />
-          ) : item ? (
-            renderItem({ item })
-          ) : null
-        }
-        contentContainerStyle={styles.content}
-      />
+      <ScrollView contentContainerStyle={styles.content}>
+        {showContent ? (
+          <>
+            <SummaryCard 
+              activeFilter={activeFilter}
+              onFilterChange={setActiveFilter}
+            />
+            <ActionButtons />
+            <View style={styles.prossection}>
+              <Text style={styles.prostext}>What the Pros are Buying</Text>
+              <Image source={Images.pros} style={styles.prosicon} />
+            </View>
+            
+            <MarketActivityCard 
+              coinName="Jupiter"
+              coinPrice="$1.04"
+              marketCap="$1.41B"
+              priceChange="0.05%"
+              isPositive={true}
+              buyersPercentage={36}
+              sellersPercentage={64}
+            />
+          </>
+        ) : (
+          <>
+            <SkeletonLoader variant="summary" />
+            <SkeletonLoader variant="actions" />
+            <SkeletonLoader variant="market-activity" />
+          </>
+        )}
+      </ScrollView>
 
       <View style={styles.footer}>
-        {renderFooterItem('Home')}
-        {renderFooterItem('Assets')}
-        {renderFooterItem('Trade')}
-        {renderFooterItem('Explore')}
+        {['Home', 'Assets', 'Trade', 'Explore'].map(renderFooterItem)}
       </View>
     </View>
   );
 };
-
-export default HomeScreen;
