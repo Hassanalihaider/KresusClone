@@ -1,24 +1,29 @@
-
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import {SplashScreen} from '../screens/Splash/SplashScreen'
 import WelcomeScreen from '../screens/Auth/WelcomeScreen'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import {SplashScreen, HomeScreen} from '../screens/index'
 
-export type RootStackParamList = {
-  Splash: undefined; 
-  Welcome:undefined
+const routeNames = {
+  splash: "Splash",
+  homeScreen: "Home",
+  welcome: "Welcome"
 }
-// files shift to next foldeer and screen optionsa aswell
-//route name.splash varia
-const Stack = createNativeStackNavigator<RootStackParamList>()
-// const routeNames = {SplashSc}
+
+// export type RootStackParamList = {
+//   Splash: undefined; 
+//   Welcome:undefined,
+//   Home: undefined;
+
+// }
+const Stack = createNativeStackNavigator()
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false ,animation: 'none',}}>
-      <Stack.Screen name="Splash" component={SplashScreen} />
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name= {routeNames.welcome} component={WelcomeScreen} />
+      <Stack.Screen name= {routeNames.splash} component={SplashScreen} />
+      <Stack.Screen name={routeNames.homeScreen} component={HomeScreen} />
     </Stack.Navigator>
   )
 }
 
-export default RootNavigator
+export default RootNavigator;
