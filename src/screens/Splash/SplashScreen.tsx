@@ -16,8 +16,8 @@ useEffect(() => {
     setShowContent(true)
     setTimeout(() => {
       navigation.navigate('Welcome')
-    }, 500) 
-  }, 1000)
+    },1000) 
+  }, 3000)
 
   return () => clearTimeout(timer)
 }, [])

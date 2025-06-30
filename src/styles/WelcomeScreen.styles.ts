@@ -41,4 +41,12 @@ export default StyleSheet.create({
     marginTop: 4,
     marginBottom: 12,
   },
+  downIcon: {
+ position: 'absolute',
+  bottom: 20,
+  left: 20,
+  width: 30,
+  height: 30,
+  zIndex: 99,
+},
 })

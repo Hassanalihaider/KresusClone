@@ -10,9 +10,7 @@ const BackgroundStyles  = StyleSheet.create({
     alignItems: 'center' 
   },
   gradient: {
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
+ 
      flex: 1,
   width: '100%',
   height: '100%', 
@@ -32,6 +30,7 @@ const BackgroundStyles  = StyleSheet.create({
     height: height * 0.25,
     alignItems: 'center',
     justifyContent: 'flex-end',
+  
   },
   waves: {
     width: width,
@@ -64,7 +63,7 @@ const BackgroundStyles  = StyleSheet.create({
   transform: [{ translateY: -height * 0.05 }],
 },
 
- 
+
 
 })
 export default BackgroundStyles

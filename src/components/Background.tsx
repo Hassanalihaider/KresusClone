@@ -9,9 +9,10 @@ type Props = {
   showContent?: boolean
    children?: ReactNode
    showLogo?: boolean 
+    hideBottomImages?: boolean
 }
 
-const Background = ({ showContent = true,children ,showLogo  }: Props) => {
+const Background = ({ showContent = true,children ,showLogo,hideBottomImages  }: Props) => {
   return (
     <LinearGradient
      colors={['#080C4C', '#0B0F70', '#0E1799']} 
@@ -29,12 +30,13 @@ const Background = ({ showContent = true,children ,showLogo  }: Props) => {
      {showLogo !== false && (
       <Image source={Images.logo} style={BackgroundStyles.logo} resizeMode="cover" />
     )}
-
+{!hideBottomImages &&(
       <View style={BackgroundStyles.bottomContainer}>
         <Image source={Images.waves} style={BackgroundStyles.waves} resizeMode="stretch" />
         <Image source={Images.land1} style={BackgroundStyles.land1} resizeMode="contain" />
         <Image source={Images.land2} style={BackgroundStyles.land2} resizeMode="contain" />
       </View>
+    )}
    
 </View>
        )}
@@ -43,6 +45,8 @@ const Background = ({ showContent = true,children ,showLogo  }: Props) => {
           {children}
         </View>
       )}
+   
+
     </LinearGradient>
   )
 }

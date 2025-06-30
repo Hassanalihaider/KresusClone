@@ -1,28 +1,93 @@
-import React from 'react'
-import { TextInput, StyleSheet, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import {
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+} from 'react-native'
+import { Images } from '../assets'
 
 const { width } = Dimensions.get('window')
 
 const AppInput = ({ placeholder }: { placeholder: string }) => {
+  const [text, setText] = useState('')
+
   return (
-    <TextInput
-      placeholder={placeholder}
-      placeholderTextColor="#ADD2FD"
-      style={styles.input}
-    />
+    <View style={styles.container}>
+      <View style={styles.inputWrapper}>
+        <TextInput
+          value={text}
+          onChangeText={setText}
+          placeholder={placeholder}
+          placeholderTextColor="#ADD2FD"
+          style={styles.input}
+        />
+
+        {text.length > 0 && (
+          <>
+            <Text style={styles.label}>{placeholder}</Text>
+            <TouchableOpacity
+              onPress={() => setText('')}
+              style={styles.clearButton}
+            >
+              <Image
+                source={Images.cross}
+                style={styles.crossIcon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
+    </View>
   )
 }
 
 export default AppInput
 
+
 const styles = StyleSheet.create({
+  container: {
+    width: width * 0.9,
+    marginVertical: 12,
+  },
+  inputWrapper: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
   input: {
-    width: width * 0.9,  // 90% of screen width
-    height: 48,
+    width: '100%',
+    height: 60, 
     borderRadius: 8,
     paddingHorizontal: 16,
+    paddingTop: 18, 
     backgroundColor: '#0734A9',
-    color:'#FFFFFF',
-    fontSize: 16,
+    color: '#FFFFFF',
+    fontSize: 18,
+    paddingRight: 40, 
+    textAlignVertical: 'center'
+
+  },
+  label: {
+    position: 'absolute',
+    top: 6,
+    left: 16,
+    fontSize: 13,
+    color: '#ADD2FD',
+  },
+  clearButton: {
+    position: 'absolute',
+    right: 12,
+    bottom: 20, // positioned to right-bottom
+  },
+  crossIcon: {
+    width: 18,
+    height: 18,
   },
 })
+
+
+

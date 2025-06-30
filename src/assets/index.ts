@@ -17,5 +17,6 @@ export const Images = {
   send : require('./images/send.png'),
   coinlogo : require('./images/coinlogo.png'),
   tradelogo : require('./images/trade.png'),
-  pros: require('./images/pros.png')
+  pros: require('./images/pros.png'),
+ cross:require('./images/cross.png')
 }
